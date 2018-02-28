@@ -7,10 +7,11 @@
           <a @click="showDetails(movie)">
             {{movie.title}}
           </a>
+          <button type="submit" @click="addMovie(movie)">Add to Watchlist</button>
         </li>
       </ol>
+      <detailz class="col-sm-6" :movie="activeMovie"></detailz>
     </div>
-    <detailz class="col-sm-6" :movie="activeMovie"></detailz>
   </div>
 </template>
 
@@ -25,6 +26,9 @@
     methods: {
       showDetails(movie) {
         this.$store.dispatch('setActiveMovie', movie)
+      },
+      addMovie(movie){
+        this.$store.dispatch('addMovie', movie)
       }
     },
     computed: {
@@ -33,6 +37,9 @@
       },
       activeMovie() {
         return this.$store.state.activeMovie
+      },
+      watchlists(){
+        return this.$store.state.watchlists
       }
     },
     components: {

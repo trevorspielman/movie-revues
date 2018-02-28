@@ -5,6 +5,9 @@
         <input type="text" placeholder="Search Movie Title" v-model="title">
         <button type="submit">Search Movie Revues</button>
       </form>
+      <div class="col-sm-12">
+        <button @click="myWatchlist">Get My Watchlist</button>
+      </div>
     </div>
     <div class="row">
       <!-- search results col-sm-6 -->
@@ -27,6 +30,9 @@
     methods: {
       movieSearch() {
         this.$store.dispatch('movieSearch', this.title)
+      },
+      myWatchlist(){
+        this.$store.dispatch('myWatchlist')
       }
     },
     components: {

@@ -24,6 +24,7 @@ var port = 3000
 server.use(bp.json())
 server.use(bp.urlencoded({ extended: true }))
 server.use(cors(corsOptions))
+server.use(watchlistRoutes)
 
 
 // server.use(session)
@@ -35,8 +36,6 @@ server.use('/api/*', (req, res, next) => {
     }
     next()
 })
-
-server.use(watchlistRoutes)
 
 server.use('*', (error, req, res, next) => {
     res.status(400).send(error)
