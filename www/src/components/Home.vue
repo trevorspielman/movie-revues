@@ -8,7 +8,7 @@
     </div>
     <div class="row">
       <!-- search results col-sm-6 -->
-      <Results class="col-sm-12"></Results>
+      <results class="col-sm-12" :title="title"></results>
       <!-- search details col-sm-6 -->
 
     </div>
@@ -16,9 +16,9 @@
 </template>
 
 <script>
-  import Results from './Results.vue'
+  import Results from './Results'
   export default {
-    name: 'home',
+    name: 'Home',
     data() {
       return {
         title: ''
@@ -26,11 +26,11 @@
     },
     methods: {
       movieSearch() {
-        this.$store.dispatch('getMovies', this.title)
+        this.$store.dispatch('movieSearch', this.title)
       }
     },
     components: {
-      Results: results
+      Results
     }
   }
 </script>

@@ -1,14 +1,16 @@
 <template>
   <div class="results">
     <h4>Search Results:</h4>
-    <ol>
-      <li v-for="movie in movies">
-        <a @click="showDetails(movie)">
-          {{movie.title}}
-        </a>
-      </li>
-    </ol>
-    <Detailz class="col-sm-6" :movie="activeMovie"></Detailz>
+    <div class="row">
+      <ol>
+        <li v-for="movie in movies">
+          <a @click="showDetails(movie)">
+            {{movie.title}}
+          </a>
+        </li>
+      </ol>
+    </div>
+    <detailz class="col-sm-6" :movie="activeMovie"></detailz>
   </div>
 </template>
 
@@ -29,13 +31,13 @@
       movies() {
         return this.$store.state.searchResults
       },
-      activeMovie(){
+      activeMovie() {
         return this.$store.state.activeMovie
       }
     },
-  components:{
-    Detailz: Details
-  }
+    components: {
+      detailz: Details
+    }
   }
 </script>
 

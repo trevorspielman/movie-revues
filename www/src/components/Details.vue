@@ -1,7 +1,7 @@
 <template>
   <div class="details">
     <h4>Details: </h4>
-
+    {{movie.title}}
   </div>
 </template>
 
