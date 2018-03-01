@@ -27,7 +27,8 @@ export default new vuex.Store({
     },
     searchResults: [],
     activeMovie: {},
-    watchlists: []
+    watchlists: [],
+    searchActive: true
   },
   mutations: {
     addResults(state, payload) {
@@ -40,6 +41,15 @@ export default new vuex.Store({
     addMovie(state, payload) {
       state.watchlists.push(payload)
       console.log("Thisis the mutation:", payload)
+    },
+    myWatchlist(state, payload) {
+      state.searchResults = state.watchlists
+    },
+    setMyWatchlist(state, payload){
+      state.watchlists = payload
+    },
+    deactivateSearch(state, payload){
+      state.searchActive = payload
     }
   },
   actions: {
@@ -56,18 +66,39 @@ export default new vuex.Store({
       commit('setActiveMovie', payload)
     },
     addMovie({ commit, dispatch }, payload) {
-      console.log("in the store:", payload)
-      debugger
       watchlistDB.post('watchlists', payload)
         .then(res => {
-          console.log("then:", payload)
-          debugger
           commit('addMovie', res.data)
         })
         .catch(err => {
           console.error(err)
         })
-    }
+    },
+    myWatchlist({ commit, dispatch }) {
+      commit('myWatchlist')
+    },
+    getWatchlist({ commit, dispatch }) {
+      watchlistDB.get('watchlists')
+        .then(res => {
+          commit('setMyWatchlist', res.data)
+          console.log(res.data)
+        })
+        .catch(err => {
+          console.error(err)
+        })
+    },
+    deactivateSearch({commit, dispatch}, payload){
+      commit('deactivateSearch', payload)
+    },
+    removeMovie({ commit, dispatch }, payload) {
+      watchlistDB.delete('watchlists/' + payload._id)
+        .then(res => {
+          dispatch('getWatchlist')
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
   }
 })
 

@@ -11,7 +11,7 @@
     </div>
     <div class="row">
       <!-- search results col-sm-6 -->
-      <results class="col-sm-12" :title="title"></results>
+      <results :title="title"></results>
       <!-- search details col-sm-6 -->
 
     </div>
@@ -30,10 +30,12 @@
     methods: {
       movieSearch() {
         this.$store.dispatch('movieSearch', this.title)
+        this.$store.dispatch('deactivateSearch', true)
       },
       myWatchlist(){
         this.$store.dispatch('myWatchlist')
-      }
+        this.$store.dispatch('deactivateSearch', false)
+      },
     },
     components: {
       Results
